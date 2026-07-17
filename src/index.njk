@@ -1,22 +1,47 @@
 ---
 layout: base.njk
 title: null
+pagination:
+  data: collections.posts
+  size: 7
+  alias: posts
+permalink: "{% if pagination.pageNumber > 0 %}/page/{{ pagination.pageNumber + 1 }}/{% else %}/{% endif %}"
 ---
 <section class="index-intro">
   <p>A running record — writing, photographs, and things I don't want to lose.</p>
 </section>
 
-<ul class="entry-list">
-  {% for post in collections.posts | reverse %}
-    {% if loop.index <= 8 %}
-    <li class="entry-list-item">
-      <a href="{{ post.url }}">
-        <span class="entry-list-title">{{ post.data.title }}</span>
+<div class="entry-stream">
+  {% for post in posts %}
+  <article class="entry-preview">
+    <header class="entry-header">
+      <h2 class="entry-title"><a href="{{ post.url }}">{{ post.data.title }}</a></h2>
+      <div class="entry-meta">
         <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
-      </a>
-    </li>
-    {% endif %}
+        {% if post.data.tags %}
+        <span class="entry-tags">
+          {% for tag in post.data.tags %}
+            {% if tag != "posts" %}
+            <a class="tag-pill" href="/tags/{{ tag | slugify }}/">{{ tag }}</a>
+            {% endif %}
+          {% endfor %}
+        </span>
+        {% endif %}
+      </div>
+    </header>
+    <div class="entry-body">
+      {{ post.templateContent | safe }}
+    </div>
+  </article>
   {% endfor %}
-</ul>
+</div>
 
-<p class="see-more"><a href="/archive/">See the full archive →</a></p>
+<nav class="pagination-nav">
+  {% if pagination.href.previous %}
+    <a href="{{ pagination.href.previous }}">← Newer</a>
+  {% endif %}
+  <span class="pagination-position">Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</span>
+  {% if pagination.href.next %}
+    <a href="{{ pagination.href.next }}">Older →</a>
+  {% endif %}
+</nav>
