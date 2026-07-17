@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  --color-paper: #eff1ea;
-  --color-paper-dim: #ececE4;
+  --color-paper: #ffffff;
+  --color-paper-dim: #ffffff;
   --color-ink: #3355eb;
   --color-ink-soft: #7285dc;
   --color-accent: #000000;
@@ -274,12 +274,44 @@ h1 {
   margin: 0 0 1.35rem;
 }
 
-/* A section break within a post — type `---` on its own line in Markdown */
+/* A section break within a post — type `---` on its own line in Markdown.
+   No visible line, just a gap. */
 .entry-body hr {
-  width: 3rem;
-  margin: 2.25rem auto;
   border: none;
-  border-top: 1px solid var(--color-rule);
+  height: 0;
+  margin: 1.25rem 0;
+}
+
+/* Hover-reveal note for a phrase within post text. In a post's Markdown:
+   <span class="hover-note">pull the trigger<span class="hover-note-popup">your note here</span></span> */
+.hover-note {
+  position: relative;
+  color: #d9668f;
+  border-bottom: 1px dotted currentColor;
+  cursor: help;
+}
+
+.hover-note-popup {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(8px);
+  background: #262626;
+  color: #f4f4f0;
+  padding: 0.5rem 0.9rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 10;
+}
+
+.hover-note:hover .hover-note-popup {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* --- Tag list page --- */
@@ -291,6 +323,18 @@ h1 {
   flex-wrap: wrap;
   gap: 0.6rem;
 }
+
+/* --- Fun text --- */
+details summary {
+  list-style: none;        /* kill the marker slot */
+}
+details summary::-webkit-details-marker {
+  display: none;           /* Safari fallback */
+}
+summary {
+  cursor: pointer;
+}
+
 
 /* --- Reduced motion --- */
 
