@@ -10,7 +10,7 @@ layout: base.njk
       <span class="entry-tags">
         {% for tag in tags %}
           {% if tag != "posts" %}
-          <a class="tag-pill" href="/tags/{{ tag | slugify }}/">{{ tag }}</a>
+          <a class="tag-pill" href="{{ prefix }}/tags/{{ tag | slugify }}/">{{ tag }}</a>
           {% endif %}
         {% endfor %}
       </span>

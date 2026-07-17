@@ -2,12 +2,29 @@ const { DateTime } = require("luxon");
 const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
 const Image = require("@11ty/eleventy-img");
 
+// The site deploys to yvonne-nguyen.github.io/likesomeonein.love/ (a
+// subpath, not a domain root). GitHub Pages automatically serves whatever's
+// in the build output under this prefix — we don't nest files under it
+// ourselves, we just need generated URLs to include it. (Eleventy's own
+// built-in pathPrefix + `url` filter mis-renders with this particular
+// prefix — it triples up — so this is applied manually via global data
+// instead of Eleventy's pathPrefix config option.)
+const PREFIX = "/likesomeonein.love";
+
 module.exports = function (eleventyConfig) {
+  eleventyConfig.addGlobalData("prefix", PREFIX);
+
   eleventyConfig.addPlugin(feedPlugin, {
     type: "atom",
     outputPath: "/feed.xml",
     collection: {
-      name: "posts",
+      // Uses "feedPosts" rather than "posts" — the feed plugin resolves
+      // item links against `metadata.base` in a way that drops any path
+      // on base when the item URL starts with "/" (standard URL-resolution
+      // behavior), which would silently strip the /likesomeonein.love
+      // prefix from every link in the feed. "feedPosts" is the same
+      // collection with that prefix already baked into each item's url.
+      name: "feedPosts",
       limit: 20,
     },
     metadata: {
@@ -44,7 +61,7 @@ module.exports = function (eleventyConfig) {
       widths: [400, 800, 1200, null], // null keeps one full-size original
       formats: ["webp", "jpeg"],
       outputDir: "./_site/img/",
-      urlPath: "/img/",
+      urlPath: PREFIX + "/img/",
     });
 
     let imageAttributes = {
@@ -89,6 +106,24 @@ module.exports = function (eleventyConfig) {
       .getFilteredByGlob("src/posts/*.md")
       .filter((post) => !post.data.draft)
       .sort((a, b) => b.date - a.date);
+  });
+
+  // Same as "posts", but with the site's subpath baked into each item's
+  // `.url` — used only by the RSS/Atom feed (see feedPlugin config above).
+  // A Proxy is used (rather than spreading the object) so lazily-computed
+  // properties like `.templateContent` aren't evaluated before Eleventy is
+  // ready for them.
+  eleventyConfig.addCollection("feedPosts", (collectionApi) => {
+    return collectionApi
+      .getFilteredByGlob("src/posts/*.md")
+      .filter((post) => !post.data.draft)
+      .sort((a, b) => b.date - a.date)
+      .map((post) => new Proxy(post, {
+        get(target, prop, receiver) {
+          if (prop === "url") return PREFIX + target.url;
+          return Reflect.get(target, prop, receiver);
+        },
+      }));
   });
 
   // Every unique tag across all posts, so tag pages can be generated

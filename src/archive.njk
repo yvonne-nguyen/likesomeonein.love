@@ -14,7 +14,7 @@ permalink: "/archive/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNu
 <ul class="entry-list">
   {% for post in posts %}
   <li class="entry-list-item">
-    <a href="{{ post.url }}">
+    <a href="{{ prefix }}{{ post.url }}">
       <span class="entry-list-title">{{ post.data.title }}</span>
       <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
     </a>
@@ -24,10 +24,10 @@ permalink: "/archive/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNu
 
 <nav class="pagination-nav">
   {% if pagination.href.previous %}
-    <a href="{{ pagination.href.previous }}">← Newer</a>
+    <a href="{{ prefix }}{{ pagination.href.previous }}">← Newer</a>
   {% endif %}
   <span class="pagination-position">Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</span>
   {% if pagination.href.next %}
-    <a href="{{ pagination.href.next }}">Older →</a>
+    <a href="{{ prefix }}{{ pagination.href.next }}">Older →</a>
   {% endif %}
 </nav>

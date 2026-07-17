@@ -14,7 +14,7 @@ eleventyComputed:
   {% for post in collections.posts %}
     {% if tag in post.data.tags %}
     <li class="entry-list-item">
-      <a href="{{ post.url }}">
+      <a href="{{ prefix }}{{ post.url }}">
         <span class="entry-list-title">{{ post.data.title }}</span>
         <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
       </a>
@@ -23,4 +23,4 @@ eleventyComputed:
   {% endfor %}
 </ul>
 
-<p class="see-more"><a href="/tags/">← All tags</a></p>
+<p class="see-more"><a href="{{ prefix }}/tags/">← All tags</a></p>

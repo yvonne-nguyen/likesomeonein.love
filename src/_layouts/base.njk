@@ -5,20 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if title %}{{ title }} · {% endif %}Marginalia</title>
   <meta name="description" content="{{ description or 'A personal collection of writing, photos, and fragments.' }}">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="{{ prefix }}/css/style.css">
   {% if extraCss %}
-  <link rel="stylesheet" href="/css/{{ extraCss }}">
+  <link rel="stylesheet" href="{{ prefix }}/css/{{ extraCss }}">
   {% endif %}
-  <link rel="alternate" type="application/rss+xml" title="Marginalia" href="/feed.xml">
+  <link rel="alternate" type="application/rss+xml" title="Marginalia" href="{{ prefix }}/feed.xml">
 </head>
 <body>
   <div class="page">
     <header class="site-header">
-      <a class="site-title" href="/">Marginalia</a>
+      <a class="site-title" href="{{ prefix }}/">Marginalia</a>
       <nav class="site-nav">
-        <a href="/archive/">Archive</a>
-        <a href="/tags/">Tags</a>
-        <a href="/about/">About</a>
+        <a href="{{ prefix }}/archive/">Archive</a>
+        <a href="{{ prefix }}/tags/">Tags</a>
+        <a href="{{ prefix }}/about/">About</a>
       </nav>
     </header>
 

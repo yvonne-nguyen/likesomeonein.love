@@ -8,7 +8,7 @@ right inside the Markdown file — nothing about the site's system stops you fro
 this on any post, whenever the mood strikes.
 
 <div class="hover-poem">
-  <img src="/images/example-placeholder.svg" alt="A placeholder image" width="320">
+  <img src="{{ prefix }}/images/example-placeholder.svg" alt="A placeholder image" width="320">
   <span class="hover-poem-popup">the part that only shows up if you look closely</span>
 </div>
 
