@@ -9,7 +9,12 @@ const Image = require("@11ty/eleventy-img");
 // built-in pathPrefix + `url` filter mis-renders with this particular
 // prefix — it triples up — so this is applied manually via global data
 // instead of Eleventy's pathPrefix config option.)
-const PREFIX = "/likesomeonein.love";
+//
+// Only applied for real builds, though — `npx eleventy --serve` serves
+// everything at the root of localhost with no subpath, so baking the
+// prefix in during local preview would break every stylesheet/link there.
+// Eleventy sets ELEVENTY_RUN_MODE to "serve" automatically for --serve.
+const PREFIX = process.env.ELEVENTY_RUN_MODE === "serve" ? "" : "/likesomeonein.love";
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addGlobalData("prefix", PREFIX);
@@ -29,7 +34,7 @@ module.exports = function (eleventyConfig) {
     },
     metadata: {
       language: "en",
-      title: "Marginalia",
+      title: "likesomeonein.love",
       subtitle: "A personal collection of writing, photos, and fragments.",
       base: "https://yvonne-nguyen.github.io/likesomeonein.love/",
       author: {
@@ -82,9 +87,18 @@ module.exports = function (eleventyConfig) {
 
   // --- Filters ---
 
-  // Human-readable date, e.g. "July 16, 2026"
+  // Human-readable date, e.g. "July 16, 2026" — used by the archive, which
+  // intentionally shows date only, no time.
   eleventyConfig.addFilter("readableDate", (dateObj) => {
     return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("LLLL d, yyyy");
+  });
+
+  // Same, plus hour:minute — used on the homepage. Note: a post's time
+  // comes from its `date:` front matter; if that's just a date with no
+  // time (e.g. `date: 2026-07-14`), Eleventy defaults it to midnight, so
+  // it'll show 12:00 AM until you add a time (e.g. `date: 2026-07-14T15:30`).
+  eleventyConfig.addFilter("readableDateTime", (dateObj) => {
+    return DateTime.fromJSDate(dateObj, { zone: "utc" }).toFormat("LLLL d, yyyy 'at' h:mm a");
   });
 
   // Machine-readable date for <time datetime="..."> , e.g. "2026-07-16"

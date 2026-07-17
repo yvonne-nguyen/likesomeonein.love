@@ -16,8 +16,8 @@ this on any post, whenever the mood strikes.
   /* Scoped to this post only — doesn't affect anything else on the site */
   .hover-poem {
     position: relative;
-    display: inline-block;
-    margin: 1.5rem 0;
+    display: table; /* shrink-wraps to the image's width, like inline-block, but centers via margin: auto */
+    margin: 1.5rem auto;
   }
   .hover-poem img {
     display: block;

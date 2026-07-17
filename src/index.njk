@@ -1,7 +1,6 @@
 ---
 layout: base.njk
 title: null
-extraCss: index.css
 pagination:
   data: collections.posts
   size: 7
@@ -17,22 +16,13 @@ permalink: "{% if pagination.pageNumber > 0 %}/page/{{ pagination.pageNumber + 1
   <article class="entry-preview">
     <header class="entry-header">
       <h2 class="entry-title"><a href="{{ prefix }}{{ post.url }}">{{ post.data.title }}</a></h2>
-      <div class="entry-meta">
-        <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
-        {% if post.data.tags %}
-        <span class="entry-tags">
-          {% for tag in post.data.tags %}
-            {% if tag != "posts" %}
-            <a class="tag-pill" href="{{ prefix }}/tags/{{ tag | slugify }}/">{{ tag }}</a>
-            {% endif %}
-          {% endfor %}
-        </span>
-        {% endif %}
-      </div>
     </header>
     <div class="entry-body">
       {{ post.templateContent | safe }}
     </div>
+    <footer class="entry-footer">
+      <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDateTime }}</time>
+    </footer>
   </article>
   {% endfor %}
 </div>
