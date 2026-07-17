@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Google+Sans+Code:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 :root {
-  --color-paper: #fafbf6;
+  --color-paper: #eff1ea;
   --color-paper-dim: #ececE4;
-  --color-ink: #5c5c5c;
-  --color-ink-soft: #8a8a8a;
-  --color-accent: #4A5D45;
-  --color-rule: #dcd9cd;
+  --color-ink: #3355eb;
+  --color-ink-soft: #7285dc;
+  --color-accent: #000000;
+  --color-rule: #dad5d5;
 
   --font-mono: 'Google Sans Code', 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
 
-  --measure: 42rem;
+  --measure: 40rem;
 }
 
 * {
@@ -26,8 +26,8 @@ body {
   background: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-mono);
-  font-size: 0.95rem;
-  line-height: 1.7;
+  font-size: 0.9rem;
+  line-height: 2;
 }
 
 .page {
@@ -62,13 +62,12 @@ button:focus-visible {
   gap: 0.5rem 1.5rem;
   padding-bottom: 1.5rem;
   margin-bottom: 2.5rem;
-  border-bottom: 1px solid var(--color-rule);
 }
 
 .site-title {
   font-family: var(--font-mono);
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 1rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-ink);
@@ -77,14 +76,14 @@ button:focus-visible {
 
 .site-nav {
   display: flex;
-  gap: 1.25rem;
+  gap: 1.5rem;
   font-family: var(--font-mono);
   font-size: 0.85rem;
 }
 
 .site-nav a {
-  color: var(--color-ink-soft);
-  text-decoration: none;
+  color: var(--color-ink);
+  text-decoration: underline;
 }
 
 .site-nav a:hover {
@@ -96,7 +95,6 @@ button:focus-visible {
 .site-footer {
   margin-top: 4rem;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--color-rule);
   font-family: var(--font-mono);
   font-size: 0.8rem;
   color: var(--color-ink-soft);
@@ -116,10 +114,9 @@ h1 {
 .index-intro {
   color: var(--color-ink-soft);
   font-style: italic;
-  font-size: 1.05rem;
-  padding-bottom: 2rem;
+  font-size: 1rem;
+  padding-bottom: 1rem;
   margin-bottom: 0.5rem;
-  border-bottom: 1px solid var(--color-rule);
   text-align: center;
 }
 
@@ -131,8 +128,7 @@ h1 {
 }
 
 .entry-preview {
-  padding: 2.75rem 0;
-  border-bottom: 1px solid var(--color-rule);
+  padding: 3.5rem 0;
 }
 
 .entry-preview:first-child {
@@ -225,7 +221,6 @@ h1 {
   gap: 2rem;
   margin-top: 2rem;
   padding-top: 1.5rem;
-  border-top: 1px solid var(--color-rule);
   font-family: var(--font-mono);
   font-size: 0.85rem;
 }
@@ -268,21 +263,6 @@ h1 {
   flex-wrap: wrap;
 }
 
-.tag-pill {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--color-accent);
-  background: var(--color-paper-dim);
-  border: 1px solid var(--color-rule);
-  padding: 0.15rem 0.55rem;
-  border-radius: 3px;
-  text-decoration: none;
-}
-
-.tag-pill:hover {
-  border-color: var(--color-accent);
-}
-
 .entry-body img {
   display: block;
   max-width: 100%;
@@ -292,6 +272,14 @@ h1 {
 
 .entry-body p {
   margin: 0 0 1.35rem;
+}
+
+/* A section break within a post — type `---` on its own line in Markdown */
+.entry-body hr {
+  width: 3rem;
+  margin: 2.25rem auto;
+  border: none;
+  border-top: 1px solid var(--color-rule);
 }
 
 /* --- Tag list page --- */
