@@ -13,5 +13,8 @@
     "@11ty/eleventy": "^3.1.6",
     "@11ty/eleventy-plugin-rss": "^3.0.0",
     "luxon": "^3.7.2"
+  },
+  "dependencies": {
+    "@11ty/eleventy-img": "^6.0.4"
   }
 }

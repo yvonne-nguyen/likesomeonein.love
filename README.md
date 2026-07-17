@@ -62,11 +62,28 @@ self-hosted on GitHub Pages, no database, no infinite scroll, fully hand-editabl
 
 ## Adding photos
 
-Drop image files into `src/images/`, then reference them in a post with normal
-Markdown or HTML:
+For a quick one-off image, drop the file into `src/images/` and reference it with
+normal Markdown or HTML:
 ```markdown
 ![Description of the photo](/images/whatever.jpg)
 ```
+This copies the file through untouched — fine for the occasional image, but every
+visitor downloads it at full size regardless of their screen.
+
+If you're adding a lot of photos, use the `image` shortcode instead. It resizes
+each photo into several widths, converts it to modern formats (WebP + JPEG
+fallback), and adds lazy loading automatically — so pages stay fast no matter how
+many images you add:
+```markdown
+{% image "src/images/whatever.jpg", "Description of the photo" %}
+```
+Processed images are cached in `.cache/` so rebuilds stay fast, and the output
+goes to `_site/img/` (both already gitignored — nothing extra to commit).
+
+Because the shortcode just renders normal HTML, you can still wrap it in your own
+markup for custom effects — e.g. the hover-reveal trick in
+`src/posts/2026-07-14-portrait-unfolding.md` works the same way whether the image
+inside is a plain `<img>` tag or the shortcode's output.
 
 ## Wanting custom CSS/HTML on just one entry
 

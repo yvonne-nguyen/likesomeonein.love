@@ -1,5 +1,6 @@
 const { DateTime } = require("luxon");
 const { feedPlugin } = require("@11ty/eleventy-plugin-rss");
+const Image = require("@11ty/eleventy-img");
 
 module.exports = function (eleventyConfig) {
   eleventyConfig.addPlugin(feedPlugin, {
@@ -23,6 +24,44 @@ module.exports = function (eleventyConfig) {
   // Copy CSS and images straight through to the output folder untouched
   eleventyConfig.addPassthroughCopy("src/css");
   eleventyConfig.addPassthroughCopy("src/images");
+
+  // --- Image shortcode ---
+  // Resizes + converts photos to modern formats (webp/jpeg) at build time,
+  // with a responsive srcset and lazy loading built in. Processed files are
+  // cached in .cache/ so rebuilds stay fast.
+  //
+  // Usage in a post: {% image "src/images/my-photo.jpg", "Alt text describing it" %}
+  //
+  // This is separate from the raw src/images passthrough above — plain files
+  // (like SVGs, or anything you don't want resized) still work fine as
+  // regular <img src="/images/whatever.svg"> tags.
+  async function imageShortcode(src, alt, sizes = "100vw") {
+    if (!alt) {
+      throw new Error(`Missing \`alt\` text for image: ${src}`);
+    }
+
+    let metadata = await Image(src, {
+      widths: [400, 800, 1200, null], // null keeps one full-size original
+      formats: ["webp", "jpeg"],
+      outputDir: "./_site/img/",
+      urlPath: "/img/",
+    });
+
+    let imageAttributes = {
+      alt,
+      sizes,
+      loading: "lazy",
+      decoding: "async",
+    };
+
+    // Returns a <picture> element with the generated <source>/<img> tags.
+    // Wrap the shortcode call in your own container (e.g. for the
+    // hover-reveal effect used in "Portrait, unfolding") and target the
+    // nested <img> with CSS exactly as you would a normal image.
+    return Image.generateHTML(metadata, imageAttributes);
+  }
+
+  eleventyConfig.addAsyncShortcode("image", imageShortcode);
 
   // --- Filters ---
 

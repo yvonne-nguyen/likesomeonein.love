@@ -1,5 +1,27 @@
 /* --- Homepage-only styles (loaded on / in addition to style.css) --- */
 
+/* Different background + monospace type + centered layout, homepage only.
+   Change --color-homepage-bg below to try other colors. */
+:root {
+  --color-homepage-bg: #927802;
+}
+
+body {
+  background: var(--color-homepage-bg);
+  font-family: var(--font-mono);
+}
+
+.site-header {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.pagination-nav {
+  justify-content: center;
+  gap: 2rem;
+}
+
 .index-intro {
   color: var(--color-ink-soft);
   font-style: italic;
@@ -32,6 +54,11 @@
 
 .entry-preview .entry-header {
   margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.entry-preview .entry-meta {
+  justify-content: center;
 }
 
 .entry-preview .entry-title {
