@@ -1,0 +1,24 @@
+---
+layout: base.njk
+---
+<article class="entry">
+  <header class="entry-header">
+    <h1 class="entry-title">{{ title }}</h1>
+    <div class="entry-meta">
+      <time datetime="{{ date | isoDate }}">{{ date | readableDate }}</time>
+      {% if tags %}
+      <span class="entry-tags">
+        {% for tag in tags %}
+          {% if tag != "posts" %}
+          <a class="tag-pill" href="/tags/{{ tag | slugify }}/">{{ tag }}</a>
+          {% endif %}
+        {% endfor %}
+      </span>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="entry-body">
+    {{ content | safe }}
+  </div>
+</article>

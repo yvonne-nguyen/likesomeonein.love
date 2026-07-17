@@ -1,0 +1,33 @@
+---
+layout: base.njk
+title: Archive
+pagination:
+  data: collections.posts
+  size: 15
+  reverse: true
+  alias: posts
+permalink: "/archive/{% if pagination.pageNumber > 0 %}page-{{ pagination.pageNumber + 1 }}/{% endif %}"
+---
+<h1>Archive</h1>
+<p class="archive-count">{{ collections.posts.length }} entries total.</p>
+
+<ul class="entry-list">
+  {% for post in posts %}
+  <li class="entry-list-item">
+    <a href="{{ post.url }}">
+      <span class="entry-list-title">{{ post.data.title }}</span>
+      <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+    </a>
+  </li>
+  {% endfor %}
+</ul>
+
+<nav class="pagination-nav">
+  {% if pagination.href.previous %}
+    <a href="{{ pagination.href.previous }}">← Newer</a>
+  {% endif %}
+  <span class="pagination-position">Page {{ pagination.pageNumber + 1 }} of {{ pagination.pages.length }}</span>
+  {% if pagination.href.next %}
+    <a href="{{ pagination.href.next }}">Older →</a>
+  {% endif %}
+</nav>

@@ -1,0 +1,22 @@
+---
+layout: base.njk
+title: null
+---
+<section class="index-intro">
+  <p>A running record — writing, photographs, and things I don't want to lose.</p>
+</section>
+
+<ul class="entry-list">
+  {% for post in collections.posts | reverse %}
+    {% if loop.index <= 8 %}
+    <li class="entry-list-item">
+      <a href="{{ post.url }}">
+        <span class="entry-list-title">{{ post.data.title }}</span>
+        <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+      </a>
+    </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+
+<p class="see-more"><a href="/archive/">See the full archive →</a></p>

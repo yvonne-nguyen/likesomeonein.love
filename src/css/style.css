@@ -1,0 +1,269 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+:root {
+  --color-paper: #EDE9DF;
+  --color-paper-dim: #E3DECF;
+  --color-ink: #242019;
+  --color-ink-soft: #55503f;
+  --color-accent: #4A5D45;
+  --color-rule: #cdc6b3;
+
+  --font-serif: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
+
+  --measure: 42rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-serif);
+  font-size: 1.125rem;
+  line-height: 1.7;
+}
+
+.page {
+  max-width: var(--measure);
+  margin: 0 auto;
+  padding: 3rem 1.5rem 5rem;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+/* --- Header --- */
+
+.site-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.site-title {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.95rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ink);
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  gap: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.site-nav a {
+  color: var(--color-ink-soft);
+  text-decoration: none;
+}
+
+.site-nav a:hover {
+  color: var(--color-accent);
+}
+
+/* --- Footer --- */
+
+.site-footer {
+  margin-top: 4rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-rule);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-ink-soft);
+}
+
+/* --- Headings --- */
+
+h1 {
+  font-size: 1.9rem;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 0 0 1.5rem;
+}
+
+/* --- Index / homepage --- */
+
+.index-intro {
+  color: var(--color-ink-soft);
+  font-style: italic;
+  margin-bottom: 2.5rem;
+}
+
+/* --- Entry list (homepage, archive, tag pages) --- */
+
+.entry-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.entry-list-item {
+  border-bottom: 1px solid var(--color-rule);
+}
+
+.entry-list-item a {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.9rem 0;
+  text-decoration: none;
+  color: var(--color-ink);
+}
+
+.entry-list-item a:hover .entry-list-title {
+  color: var(--color-accent);
+}
+
+.entry-list-title {
+  font-size: 1.05rem;
+}
+
+.entry-list-item time {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--color-ink-soft);
+  white-space: nowrap;
+}
+
+.see-more {
+  margin-top: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+}
+
+/* --- Pagination --- */
+
+.pagination-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-rule);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.pagination-position {
+  color: var(--color-ink-soft);
+}
+
+.archive-count {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--color-ink-soft);
+  margin-top: -1rem;
+  margin-bottom: 2rem;
+}
+
+/* --- Single entry --- */
+
+.entry-header {
+  margin-bottom: 2rem;
+}
+
+.entry-title {
+  margin-bottom: 0.75rem;
+}
+
+.entry-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--color-ink-soft);
+}
+
+.entry-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tag-pill {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--color-accent);
+  background: var(--color-paper-dim);
+  border: 1px solid var(--color-rule);
+  padding: 0.15rem 0.55rem;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.tag-pill:hover {
+  border-color: var(--color-accent);
+}
+
+.entry-body img {
+  max-width: 100%;
+  height: auto;
+}
+
+.entry-body p {
+  margin: 0 0 1.35rem;
+}
+
+/* --- Tag list page --- */
+
+.tag-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+/* --- Reduced motion --- */
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* --- Mobile --- */
+
+@media (max-width: 480px) {
+  body {
+    font-size: 1.05rem;
+  }
+  .entry-list-item a {
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+}

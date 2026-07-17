@@ -1,0 +1,26 @@
+---
+layout: base.njk
+pagination:
+  data: collections.tagList
+  size: 1
+  alias: tag
+permalink: "/tags/{{ tag | slugify }}/"
+eleventyComputed:
+  title: "{{ tag }}"
+---
+<h1>Tag: {{ tag }}</h1>
+
+<ul class="entry-list">
+  {% for post in collections.posts %}
+    {% if tag in post.data.tags %}
+    <li class="entry-list-item">
+      <a href="{{ post.url }}">
+        <span class="entry-list-title">{{ post.data.title }}</span>
+        <time datetime="{{ post.date | isoDate }}">{{ post.date | readableDate }}</time>
+      </a>
+    </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+
+<p class="see-more"><a href="/tags/">← All tags</a></p>
