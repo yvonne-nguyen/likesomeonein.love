@@ -6,6 +6,9 @@
   <title>{% if title %}{{ title }} · {% endif %}Marginalia</title>
   <meta name="description" content="{{ description or 'A personal collection of writing, photos, and fragments.' }}">
   <link rel="stylesheet" href="/css/style.css">
+  {% if extraCss %}
+  <link rel="stylesheet" href="/css/{{ extraCss }}">
+  {% endif %}
   <link rel="alternate" type="application/rss+xml" title="Marginalia" href="/feed.xml">
 </head>
 <body>
